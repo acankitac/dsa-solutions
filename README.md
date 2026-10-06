@@ -46,12 +46,13 @@ The catalog is built from the header comment at the top of each solution:
 ## Catalog
 
 <!-- CATALOG:START -->
-**3 problems** — Easy: 0 · Medium: 2 · Hard: 1
+**4 problems** — Easy: 1 · Medium: 2 · Hard: 1
 
-### design (2)
+### design (3)
 
 | Problem | Difficulty | Solution | Tags |
 |---|---|---|---|
+| [Design HashMap](https://leetcode.com/problems/design-hashmap/) | Easy | [Java](topics/design/hashmap/Solution.java) | design, hash-map, linked-list |
 | [LRU Cache](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache/Solution.java) | design, hash-map, doubly-linked-list |
 | [LRU Cache (Thread-Safe)](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache-thread-safe/Solution.java) | design, concurrency, locks, hash-map, doubly-linked-list |
 
