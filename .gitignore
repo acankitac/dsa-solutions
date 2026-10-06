@@ -1,0 +1,10 @@
+*.class
+*.out
+*.o
+a.out
+build/
+out/
+.DS_Store
+.idea/
+.vscode/
+*.iml

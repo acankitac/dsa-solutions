@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Compile C++ solutions
+        run: |
+          shopt -s globstar nullglob
+          for f in topics/**/*.cpp; do
+            echo "::group::$f"
+            g++ -std=c++20 -Wall -DLOCAL -Iinclude -fsyntax-only "$f"
+            echo "::endgroup::"
+          done
+
+      - name: Compile Java solutions
+        run: |
+          shopt -s globstar nullglob
+          # Every problem has its own Solution class, so compile them one at a time.
+          for f in topics/**/*.java; do
+            echo "::group::$f"
+            javac -d "$(mktemp -d)" "$f"
+            echo "::endgroup::"
+          done
+
+  catalog:
+    needs: compile
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate catalog
+        run: python3 scripts/catalog.py
+
+      - name: Commit README if changed
+        run: |
+          if git diff --quiet README.md; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update catalog"
+          git push
