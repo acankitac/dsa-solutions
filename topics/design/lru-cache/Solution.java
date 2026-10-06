@@ -8,86 +8,87 @@
 import java.util.*;
 
 class LRU {
-    private int capacity, size;
-    private Map<Integer, Node> ref;
-    Node head, tail;
 
-    LRU(int cap) {
-      if (cap<=0) {
-        throw new IllegalArgumentException("Capacity should be positive integer!");
-      }
-      capacity = cap;
-      size=0;
-      ref = new HashMap<>();
-      head = new Node(0,0);
-      tail = new Node(0,0); // dummy head, tail so that we don't have to deal with null checks
-      head.next = tail;
-      tail.prev = head;
+    private static class Node {
+        final int key;
+        int val;
+        Node prev, next;
+
+        Node(int key, int val) {
+            this.key = key;
+            this.val = val;
+        }
     }
 
-    public void put(int key, int val) {
-      if (!ref.containsKey(key)) {
-        if (size>=capacity) {
-          ref.remove(tail.prev.k);
-          remove(tail.prev);
-          size--;
-        }
+    private final int capacity;
+    private final Map<Integer, Node> ref = new HashMap<>();
+    // Dummy head and tail so we never have to deal with null checks.
+    private final Node head = new Node(0, 0);
+    private final Node tail = new Node(0, 0);
 
-        Node newNode = add(key, val);
-        size++;
-        ref.put(key, newNode);
-      }
-      else {
-        Node oldNode = ref.get(key);
-        remove(oldNode);
-        Node newNode = add(key, val);
-        ref.put(key, newNode);
-      }
+    LRU(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity should be positive integer!");
+        }
+        this.capacity = capacity;
+        head.next = tail;
+        tail.prev = head;
     }
 
     public int get(int key) {
-      if (!ref.containsKey(key)) return -1;
-      Node node = ref.get(key);
-      remove(node);
-      add(node);
-      return node.v;
+        Node node = ref.get(key);
+        if (node == null) {
+            return -1;
+        }
+        remove(node);
+        addToFront(node);
+        return node.val;
     }
 
+    public void put(int key, int val) {
+        Node node = ref.get(key);
+        if (node != null) {
+            // Existing key: update in place and mark as most recently used.
+            node.val = val;
+            remove(node);
+            addToFront(node);
+            return;
+        }
+
+        if (ref.size() >= capacity) {
+            ref.remove(removeLast().key);
+        }
+        node = new Node(key, val);
+        addToFront(node);
+        ref.put(key, node);
+    }
+
+    // De-link the node from the list.
     private void remove(Node node) {
-      // de-link the node
-      node.prev.next=node.next;
-      node.next.prev=node.prev;
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
     }
 
-    private Node add(int key, int val) {
-
-      Node node = new Node(key, val);
-      add(node);
-      return node;
+    // Evict the least recently used node, which sits just before tail.
+    private Node removeLast() {
+        Node last = tail.prev;
+        remove(last);
+        return last;
     }
 
-    private void add(Node node) {
-      // always add node to the front
-      head.next.prev=node;
-      node.next = head.next;
-      node.prev=head;
-      head.next=node;
+    // The most recently used node always sits just after head.
+    private void addToFront(Node node) {
+        node.next = head.next;
+        node.prev = head;
+        head.next.prev = node;
+        head.next = node;
     }
-  }
-
-  class Node {
-    int k,v;
-    Node prev, next;
-
-    Node(int key, int val) {
-      k = key;
-      v = val;
-    }
-  }
+}
 
 class Solution {
 
-    // Local driver: LeetCode example 1. Expected: 1 -1 -1 3 4
+    // Local driver: LeetCode example 1, plus updating an existing key.
+    // Expected: 1 -1 -1 3 4 | 30 -1
     public static void main(String[] args) {
         LRU cache = new LRU(2);
         cache.put(1, 1);
@@ -97,6 +98,12 @@ class Solution {
         System.out.print(cache.get(2) + " ");
         cache.put(4, 4);
         System.out.print(cache.get(1) + " ");
+        System.out.print(cache.get(3) + " ");
+        System.out.print(cache.get(4) + " | ");
+
+        // Updating 3 makes it most recent, so adding 5 evicts 4.
+        cache.put(3, 30);
+        cache.put(5, 5);
         System.out.print(cache.get(3) + " ");
         System.out.println(cache.get(4));
     }
