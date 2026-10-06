@@ -46,5 +46,11 @@ The catalog is built from the header comment at the top of each solution:
 ## Catalog
 
 <!-- CATALOG:START -->
-_No solutions yet. Run `scripts/new.sh` to add one._
+**1 problem** — Easy: 0 · Medium: 1 · Hard: 0
+
+### design (1)
+
+| Problem | Difficulty | Solution | Tags |
+|---|---|---|---|
+| [LRU Cache](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache/Solution.java) | design, hash-map, doubly-linked-list |
 <!-- CATALOG:END -->
