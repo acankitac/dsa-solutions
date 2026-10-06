@@ -46,7 +46,7 @@ The catalog is built from the header comment at the top of each solution:
 ## Catalog
 
 <!-- CATALOG:START -->
-**2 problems** — Easy: 0 · Medium: 2 · Hard: 0
+**3 problems** — Easy: 0 · Medium: 2 · Hard: 1
 
 ### design (2)
 
@@ -54,4 +54,10 @@ The catalog is built from the header comment at the top of each solution:
 |---|---|---|---|
 | [LRU Cache](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache/Solution.java) | design, hash-map, doubly-linked-list |
 | [LRU Cache (Thread-Safe)](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache-thread-safe/Solution.java) | design, concurrency, locks, hash-map, doubly-linked-list |
+
+### heap (1)
+
+| Problem | Difficulty | Solution | Tags |
+|---|---|---|---|
+| [Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/) | Hard | [Java](topics/heap/meeting-rooms-iii/Solution.java) | heap, sorting, simulation |
 <!-- CATALOG:END -->
