@@ -46,7 +46,7 @@ The catalog is built from the header comment at the top of each solution:
 ## Catalog
 
 <!-- CATALOG:START -->
-**5 problems** — Easy: 1 · Medium: 3 · Hard: 1
+**6 problems** — Easy: 1 · Medium: 4 · Hard: 1
 
 ### design (4)
 
@@ -56,6 +56,12 @@ The catalog is built from the header comment at the top of each solution:
 | In-Memory KV Store With Nested Transactions | Medium | [Java](topics/design/kv-store-transactions/Solution.java) | design, hash-map, stack, transactions |
 | [LRU Cache](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache/Solution.java) | design, hash-map, doubly-linked-list |
 | [LRU Cache (Thread-Safe)](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache-thread-safe/Solution.java) | design, concurrency, locks, hash-map, doubly-linked-list |
+
+### dp (1)
+
+| Problem | Difficulty | Solution | Tags |
+|---|---|---|---|
+| [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) | Medium | [Java](topics/dp/longest-increasing-subsequence/Solution.java) | dp, binary-search, patience-sorting, tree-map |
 
 ### heap (1)
 
