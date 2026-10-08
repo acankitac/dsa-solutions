@@ -7,10 +7,12 @@
 
 // Two-lock linked queue (same design as java.util.concurrent.LinkedBlockingQueue): producers
 // and consumers use separate locks, and the AtomicInteger size publishes linked nodes across them.
+
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.atomic.*;
 
 class BoundedBlockingQueue<T> {
 
@@ -96,7 +98,7 @@ class Solution {
 
         int capacity = 3, producers = 4, consumers = 4, perThread = 50_000;
         BoundedBlockingQueue<Integer> q = new BoundedBlockingQueue<>(capacity);
-        java.util.concurrent.atomic.AtomicLong sum = new java.util.concurrent.atomic.AtomicLong();
+        AtomicLong sum = new AtomicLong();
         AtomicInteger maxSize = new AtomicInteger();
         List<Thread> threads = new ArrayList<>();
         for (int p = 0; p < producers; p++) {
