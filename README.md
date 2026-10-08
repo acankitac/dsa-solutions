@@ -46,13 +46,14 @@ The catalog is built from the header comment at the top of each solution:
 ## Catalog
 
 <!-- CATALOG:START -->
-**7 problems** — Easy: 1 · Medium: 4 · Hard: 2
+**8 problems** — Easy: 1 · Medium: 5 · Hard: 2
 
-### design (5)
+### design (6)
 
 | Problem | Difficulty | Solution | Tags |
 |---|---|---|---|
 | [Design HashMap](https://leetcode.com/problems/design-hashmap/) | Easy | [Java](topics/design/hashmap/Solution.java) | design, hash-map, linked-list |
+| [Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | Medium | [Java](topics/design/bounded-blocking-queue/Solution.java) | design, concurrency, locks, linked-list |
 | In-Memory KV Store With Nested Transactions | Medium | [Java](topics/design/kv-store-transactions/Solution.java) | design, hash-map, stack, transactions |
 | [LRU Cache](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache/Solution.java) | design, hash-map, doubly-linked-list |
 | [LRU Cache (Thread-Safe)](https://leetcode.com/problems/lru-cache/) | Medium | [Java](topics/design/lru-cache-thread-safe/Solution.java) | design, concurrency, locks, hash-map, doubly-linked-list |
